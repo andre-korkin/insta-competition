@@ -5,8 +5,10 @@ const $count = document.querySelector('.count')
 $count.textContent = `Всего ${comLength} комментариев:`
 
 const $comments = document.querySelector('.comments')
+let id = 0
 comments.forEach(comment => {
     const $comment = document.createElement('div')
+    $comment.id = `comment${id}`
 
     const $author = document.createElement('a')
     $author.className = 'author'
@@ -25,4 +27,17 @@ comments.forEach(comment => {
     })
 
     $comments.append($comment)
+    id++
 })
+
+const $button = document.querySelector('.btn')
+$button.addEventListener('click', changeWinner)
+
+
+function changeWinner() {
+    const winner = Math.floor(Math.random() * comLength)
+    const $arrComments = document.querySelectorAll('.comments div')
+    $arrComments[winner].style.borderColor = '#fff'
+    $arrComments[winner].style.background = 'rgba(0, 0, 0, 0.4)'
+    location.href = winner > 1 ? `#comment${winner - 1}` : `#comment${winner}`
+}
